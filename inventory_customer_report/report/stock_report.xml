@@ -1,0 +1,50 @@
+<odoo>
+
+    <record id="action_stock_val_pdf_report" model="ir.actions.report">
+        <field name="name">Project Report</field>
+        <field name="model">stock.val.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">inventory_customer_report.stock_val_pdf_report</field>
+        <field name="report_file">inventory_customer_report.stock_val_pdf_report</field>
+        <field name="binding_model_id" ref="inventory_customer_report.model_stock_val_wizard"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="action_stock_val_pdf_report_header_footer">
+        <t t-set="company" t-value="res_company"/>
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-4 mb4">
+                    <img  src="/inventory_customer_report/static/header.jpeg" alt="Logo"/>
+                </div>
+                <div class="col-9 text-end" style="margin-top:22px;" t-if="company.report_header" t-field="company.report_header" name="moto">Company tagline</div>
+            </div>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid #bdbdbd;">
+                <ul class="list-inline mb4">
+                    <div t-field="company.report_footer"/>
+                </ul>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+                <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                    <span t-out="o.name">(document name)</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="stock_val_pdf_report">
+        <t t-call="web.html_container">
+            <div class="article o_report_layout_standard" t-att-data-oe-model="doc and doc._name"
+                 t-att-data-oe-id="doc and doc.id">
+                
+            </div>
+        </t>
+
+    </template>
+
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_crm_lead_form_inherited_whatsapp" model="ir.ui.view">
+        <field name="name">crm.lead.view.form.inherited.whatsapp</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/> <!-- Ensure this XML ID exists -->
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button type="object" class="btn-primary"
+                        name="action_send_whatsapp" icon="fa-whatsapp" string="Send via WhatsApp"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_tree_inherited_whatsapp" model="ir.ui.view">
+        <field name="name">crm.lead.view.tree.inherited.whatsapp</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <button type="object" class="btn-primary"
+                        name="action_whatsapp_multi" icon="fa-whatsapp" string="Send Multiple via WhatsApp"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

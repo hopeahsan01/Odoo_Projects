@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        <template id="portal_my_task_delivery" name="My Task website" inherit_id="project.portal_my_task">
+               <xpath expr="//div[1]/div[1]" position="before">
+                <a t-attf-href="/my/task/project/{{task.project_id.id}}" class="btn btn-primary rounded-3">تحميل التقرير</a>
+            </xpath>
+            <xpath expr="//div[@name='portal_my_task_allocated_hours']" position="replace">
+                <div><strong>التاريخ:</strong>
+                    <span t-field="task.date_delivered"/>
+                </div>
+                <div><strong>الكمية:</strong>
+                    <span t-field="task.qty_delivered"/>
+                </div>
+                <div><strong> الوحدة:</strong>
+                    <span t-field="task.product_id.name"/>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="portal_tasks_list_inh" inherit_id="project.portal_tasks_list" name="Portal: My Tasks with Timesheets">
+
+            <xpath expr="//thead/tr/th[4]" position="replace">
+                <th></th>
+            </xpath>
+            <xpath expr="//thead/tr/th[3]" position="replace">
+                <th></th>
+            </xpath>
+
+            <xpath expr="//thead" position="before">
+                <a t-attf-href="/my/task/project/{{project.id}}" class="btn btn-primary rounded-3">تحميل التقرير</a>
+            </xpath>
+
+            <xpath expr="//thead/tr/th[6]" position="after">
+                <th>التاريخ</th>
+                <th>الوحدة</th>
+                <th>الكمية</th>
+            </xpath>
+            <xpath expr="//t[@t-foreach='tasks']/tr/td[4]" position="replace">
+                <td></td>
+            </xpath>
+            <xpath expr="//t[@t-foreach='tasks']/tr/td[5]" position="replace">
+                <td></td>
+            </xpath>
+            <xpath expr="//t[@t-foreach='tasks']/tr/td[6]" position="replace">
+                <td></td>
+            </xpath>
+            <xpath expr="//t[@t-foreach='tasks']/tr/td[7]" position="after">
+                <td>
+                    <span t-esc="task.date_delivered"/>
+                </td>
+                <td>
+                    <span t-esc="task.product_id.name"/>
+                </td>
+                <td>
+                    <span t-esc="task.qty_delivered"/>
+                </td>
+            </xpath>
+            <xpath expr="//t[@t-foreach='grouped_tasks']/tbody/tr[hasclass('table-light')]" position="inside">
+                <th ></th>
+                <th ></th>
+                <th ></th>
+                <th ></th>
+
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

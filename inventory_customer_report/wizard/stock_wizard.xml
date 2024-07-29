@@ -1,0 +1,36 @@
+<odoo>
+
+    <record id="stock_val_wizard_form_view" model="ir.ui.view">
+        <field name="name">stock.val.wizard.form</field>
+        <field name="model">stock.val.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="partner_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print PDF" class="btn-primary" type="object"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_val_wizard_action" model="ir.actions.act_window">
+        <field name="name">Project Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.val.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_val_wizard_form_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="stock_val_wizard_root" name="Project Report" parent="stock.menu_warehouse_report" action="stock_val_wizard_action" sequence="21"/>
+
+</odoo>
